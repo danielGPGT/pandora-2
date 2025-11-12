@@ -325,7 +325,7 @@ export function VenueForm({ venue, onSuccess }: VenueFormProps) {
                       type="number"
                       step="any"
                       placeholder="e.g., -0.2795"
-                      {...field}
+                      value={field.value ?? ''}
                       onChange={(e) => field.onChange(e.target.value ? Number(e.target.value) : undefined)}
                     />
                   </FormControl>
