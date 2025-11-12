@@ -1,0 +1,1924 @@
+Product Requirements Document (PRD)
+Enterprise Sports Event Tour Operator Platform
+
+Document Control
+VersionDateAuthorChanges1.0November 2025Product TeamInitial Release
+
+Table of Contents
+
+Executive Summary
+Problem Statement
+Goals & Objectives
+Target Users
+User Stories & Use Cases
+Functional Requirements
+Technical Requirements
+Non-Functional Requirements
+User Interface Requirements
+Integration Requirements
+Data & Security Requirements
+Success Metrics
+Implementation Phases
+Assumptions & Constraints
+Risks & Mitigations
+Appendices
+
+
+1. Executive Summary
+1.1 Product Vision
+The Enterprise Sports Event Tour Operator Platform is a comprehensive SaaS solution designed to revolutionize how tour operators manage and sell sports event travel packages. The platform enables operators to efficiently manage complex multi-component packages (accommodation, tickets, transfers, flights, experiences) while providing flexibility for both B2C e-commerce and B2B sales workflows.
+1.2 Product Overview
+A multi-tenant platform supporting F1, MotoGP, football, tennis, golf, and other sports event tour operators with:
+
+Component-based package builder with flexible pricing (cost + markup model)
+Multi-inventory management (contracted, free-sell, buy-to-order)
+Dual business models (e-commerce and sales/quote-based)
+Operational management tools for rooming lists, manifests, and supplier coordination
+Corporate hospitality features for B2B clients
+Multi-currency support with exchange rate management
+
+1.3 Business Impact
+Revenue Goals:
+
+Enable operators to manage 5x more bookings with existing staff
+Reduce booking processing time by 70%
+Increase package upsell by 30% through better component visibility
+Reduce operational errors by 80%
+
+Market Opportunity:
+
+Sports event travel market: $23B globally (2024)
+Target: 500+ tour operators in Year 1
+Average contract value: $50K-$250K/year
+
+
+2. Problem Statement
+2.1 Current Industry Challenges
+For Tour Operators:
+
+Manual processes: Spreadsheets, emails, fragmented systems lead to errors and inefficiency
+Limited flexibility: Can't easily create custom packages or adapt to changing inventory
+Poor visibility: No real-time inventory tracking across accommodation, tickets, transfers
+Scalability issues: Can't grow without proportionally increasing staff
+Payment tracking chaos: Manual reconciliation of deposits, balances, supplier payments
+Operational nightmares: Rooming lists, manifests, supplier confirmations done manually
+
+For Customers:
+
+Slow quote turnaround (24-48 hours typical)
+Limited package customization options
+Poor booking experience (forms, emails, phone calls)
+Lack of transparency on availability and pricing
+
+2.2 Market Gap
+Existing solutions fail because they:
+
+Are built for general travel (not sports events)
+Don't handle complex multi-component packages
+Lack free-sell/provisional inventory models
+Don't support both B2C and B2B workflows
+Have poor operational tools for tour management
+
+Our solution addresses this gap by:
+
+Being purpose-built for sports event tour operators
+Supporting all inventory models (contracted, free-sell, buy-to-order)
+Enabling flexible component-based packages
+Supporting both e-commerce and sales team workflows
+Providing comprehensive operational management
+
+
+3. Goals & Objectives
+3.1 Business Goals
+Primary Goals:
+
+Become the leading platform for sports event tour operators globally
+Achieve $10M ARR within 24 months
+Onboard 500+ tour operators in Year 1
+Achieve 95% customer retention rate
+
+Secondary Goals:
+
+Expand to 10+ sports verticals
+Process $500M in gross booking value (GBV) annually
+Establish strategic partnerships with sports rights holders (F1, UEFA, etc.)
+
+3.2 Product Goals
+MVP (Phase 1 - Months 0-6):
+
+Core package management (accommodation, tickets, transfers)
+Quote & booking management
+Basic inventory allocation
+Payment tracking
+Multi-tenant support
+
+Phase 2 (Months 6-12):
+
+Flight integration (API + manual)
+Corporate features
+Enhanced operational tools
+Materialized views for performance
+Mobile app
+
+Phase 3 (Months 12-18):
+
+Supplier portal
+Customer self-service portal
+Advanced analytics & reporting
+API marketplace
+White-label options
+
+3.3 User Goals
+Tour Operators:
+
+Reduce quote creation time from 2 hours to 15 minutes
+Increase operational efficiency by 5x
+Gain real-time visibility into inventory and margins
+Automate supplier communications and confirmations
+
+Sales Teams:
+
+Create quotes in minutes, not hours
+Track pipeline and conversion rates
+Collaborate on complex corporate bookings
+Access customer history instantly
+
+Operations Teams:
+
+Generate rooming lists automatically
+Track transfer manifests in real-time
+Manage supplier confirmations efficiently
+Reduce manual data entry by 90%
+
+Finance Teams:
+
+Track payments, deposits, balances automatically
+Calculate margins and commissions accurately
+Reconcile supplier payments easily
+Generate financial reports instantly
+
+
+4. Target Users
+4.1 Primary Users
+4.1.1 Tour Operator Owner/Manager
+
+Profile: Business owner or general manager of tour operation company
+Pain Points:
+
+Can't scale without hiring more staff
+Poor visibility into margins and profitability
+Lacks data for business decisions
+
+
+Needs:
+
+Dashboard with key metrics
+Margin visibility on all packages
+Business analytics and reporting
+
+
+Success Criteria: Can make data-driven decisions and scale efficiently
+
+4.1.2 Sales Team Member
+
+Profile: Sales agent creating quotes and managing bookings
+Pain Points:
+
+Takes hours to create complex quotes
+Can't easily customize packages
+Lost quotes due to slow turnaround
+
+
+Needs:
+
+Fast quote builder
+Package customization tools
+Customer communication tracking
+Pipeline visibility
+
+
+Success Criteria: Can create and send quotes in <15 minutes
+
+4.1.3 Operations Manager
+
+Profile: Manages day-to-day tour operations and supplier relationships
+Pain Points:
+
+Manual rooming lists prone to errors
+Difficult to track transfer manifests
+Supplier confirmations lost in emails
+
+
+Needs:
+
+Automated rooming list generation
+Transfer manifest tracking
+Supplier confirmation management
+Guest detail collection
+
+
+Success Criteria: Can manage 3x more tours with same effort
+
+4.1.4 Finance/Accounting Staff
+
+Profile: Manages payments, invoicing, and reconciliation
+Pain Points:
+
+Manual payment reconciliation
+Difficult to track supplier payments
+Can't easily calculate margins
+
+
+Needs:
+
+Payment tracking dashboard
+Automated invoice generation
+Margin reporting
+Supplier payment tracking
+
+
+Success Criteria: Can close books 5x faster
+
+4.2 Secondary Users
+4.2.1 Customers (B2C)
+
+Profile: Individual travelers booking sports event packages
+Needs:
+
+Easy package browsing and booking
+Transparent pricing and availability
+Self-service account management
+
+
+Success Criteria: Can book a package in <10 minutes
+
+4.2.2 Corporate Clients (B2B)
+
+Profile: Companies booking hospitality for clients/employees
+Needs:
+
+Custom branding options
+Group booking management
+Flexible payment terms
+Dedicated account management
+
+
+Success Criteria: Can manage corporate bookings efficiently
+
+4.2.3 Suppliers
+
+Profile: Hotels, ticket providers, transfer companies
+Needs (Future):
+
+Portal to receive confirmations
+Update availability and pricing
+Track payments
+
+
+Success Criteria: Can manage bookings without manual communication
+
+
+5. User Stories & Use Cases
+5.1 Epic 1: Package Management
+US-1.1: Create Multi-Component Package
+As a tour operator owner
+I want to create packages with multiple components (accommodation, tickets, transfers, flights, extras)
+So that I can offer comprehensive tour packages to customers
+Acceptance Criteria:
+
+Can add unlimited components to a package
+Can set cost and markup for each component
+Can mark components as mandatory or optional
+Can preview calculated pricing
+System automatically calculates total package price
+
+Priority: P0 (MVP)
+US-1.2: Configure Accommodation with Complex Pricing
+As an operations manager
+I want to configure accommodation with different occupancy rates, board basis, and charges
+So that pricing accurately reflects supplier contracts
+Acceptance Criteria:
+
+Can set pricing for single, double, triple occupancy
+Can configure board basis (room only, breakfast, half board, etc.)
+Can add additional charges (city tax, VAT, resort fees)
+Can configure extra night rates
+System validates pricing logic
+
+Priority: P0 (MVP)
+US-1.3: Manage Multiple Ticket Inventory Types
+As an operations manager
+I want to manage tickets as contracted, free-sell, or buy-to-order
+So that I can handle different supplier arrangements
+Acceptance Criteria:
+
+Can create ticket inventory with type selection
+Contracted: tracks quantity and allocations
+Free-sell: unlimited quantity, no allocation tracking
+Buy-to-order: requires confirmation before selling
+System prevents overselling contracted tickets
+
+Priority: P0 (MVP)
+US-1.4: Configure Free-Sell Transfers
+As an operations manager
+I want to create transfer routes with estimated costs
+So that I can sell transfers before finalizing supplier arrangements
+Acceptance Criteria:
+
+Can create transfer routes (circuit, airport, internal)
+Can set estimated costs (per seat or per vehicle)
+Can mark as free-sell (no inventory limits)
+Can track sales for operational planning
+Can finalize actual supplier and costs later
+
+Priority: P0 (MVP)
+5.2 Epic 2: Sales & Quoting
+US-2.1: Create Customer Quote
+As a sales team member
+I want to quickly create quotes from existing packages
+So that I can respond to customer inquiries faster
+Acceptance Criteria:
+
+Can search and select packages
+Can customize components (add/remove)
+Can adjust pricing (discounts)
+Can set quote validity period
+Can preview and send quote via email
+Quote creation takes <5 minutes
+
+Priority: P0 (MVP)
+US-2.2: Track Quote Pipeline
+As a sales manager
+I want to view all quotes and their status
+So that I can track sales pipeline and conversion
+Acceptance Criteria:
+
+Dashboard shows: draft, sent, accepted, declined, expired
+Can filter by date, sales person, package, status
+Shows conversion metrics
+Can send follow-up reminders
+Auto-expires quotes past validity date
+
+Priority: P1 (Phase 1)
+US-2.3: Convert Quote to Booking
+As a sales team member
+I want to convert accepted quotes to bookings with one click
+So that I can streamline the booking process
+Acceptance Criteria:
+
+One-click conversion from quote to booking
+System allocates inventory automatically
+Generates booking reference
+Creates provisional allocations (15-minute hold)
+Sends booking confirmation email
+
+Priority: P0 (MVP)
+5.3 Epic 3: Booking Management
+US-3.1: Capture Guest Details
+As an operations manager
+I want to collect detailed guest information
+So that I can create rooming lists and manifests
+Acceptance Criteria:
+
+Can add multiple guests per booking
+Captures: name, DOB, passport details, nationality
+Captures: dietary requirements, special requests, medical conditions
+Validates required fields based on package type
+Can import guest details from CSV
+
+Priority: P0 (MVP)
+US-3.2: Process Payments
+As a finance staff member
+I want to record deposits and balance payments
+So that I can track payment status
+Acceptance Criteria:
+
+Can record deposit payment with amount and date
+Can record balance payment
+System calculates outstanding balance automatically
+Can record payment method and reference
+Supports refunds and amendments
+Generates payment receipts
+
+Priority: P0 (MVP)
+US-3.3: Manage Booking Status
+As an operations manager
+I want to update booking status through lifecycle
+So that I can track operational progress
+Acceptance Criteria:
+
+Statuses: provisional → confirmed → cancelled → completed
+Provisional: after creation, awaiting deposit
+Confirmed: after deposit received
+Cancelled: if customer cancels
+Completed: after travel date passes
+System tracks status history with timestamps
+
+Priority: P0 (MVP)
+US-3.4: Handle Booking Amendments
+As a sales team member
+I want to modify bookings after confirmation
+So that I can accommodate customer changes
+Acceptance Criteria:
+
+Can add/remove components
+Can change dates (if availability allows)
+Can add/remove guests
+System recalculates pricing automatically
+Records amendment fees
+Tracks amendment history
+
+Priority: P1 (Phase 1)
+5.4 Epic 4: Inventory Management
+US-4.1: Allocate Inventory Safely
+As a sales team member
+I want to allocate inventory without overselling
+So that I avoid double-bookings
+Acceptance Criteria:
+
+System prevents overselling contracted inventory
+Provisional allocations hold inventory for 15 minutes
+Confirmed allocations lock inventory permanently
+Expired provisional allocations release automatically
+Concurrent bookings handled safely (locking)
+
+Priority: P0 (MVP)
+US-4.2: View Real-Time Availability
+As a sales team member
+I want to see real-time availability for all components
+So that I can create accurate quotes
+Acceptance Criteria:
+
+Dashboard shows available rooms, tickets, transfers
+Updates in real-time as bookings are made
+Shows allocated vs available quantities
+Filters by event, dates, property
+Loads in <2 seconds (materialized views)
+
+Priority: P0 (MVP)
+US-4.3: Manage Accommodation Contracts
+As an operations manager
+I want to create block booking contracts with hotels
+So that I can manage room allocations
+Acceptance Criteria:
+
+Can create contract with check-in/out dates
+Can allocate multiple room types with quantities
+Can set release dates
+Can set rooming list due dates
+Can configure pricing per occupancy
+Can add board basis options
+Can add charges (city tax, VAT, etc.)
+
+Priority: P0 (MVP)
+5.5 Epic 5: Operational Management
+US-5.1: Generate Rooming Lists
+As an operations manager
+I want to automatically generate rooming lists
+So that I can send them to hotels efficiently
+Acceptance Criteria:
+
+Can generate rooming list for specific property/dates
+Includes: guest names, check-in/out dates, room types
+Includes: special requests, dietary requirements
+Can export as Excel or PDF
+Can mark as sent to hotel
+Can track changes and re-send
+
+Priority: P1 (Phase 1)
+US-5.2: Track Transfer Manifests
+As an operations manager
+I want to see transfer manifest with all passengers
+So that I can coordinate with transfer suppliers
+Acceptance Criteria:
+
+Can view passengers by transfer route and date
+Shows: guest names, pickup locations, special requirements
+Can calculate vehicles needed based on capacity
+Can assign vehicles to passengers
+Can mark supplier as confirmed
+Can export as Excel or PDF
+
+Priority: P1 (Phase 1)
+US-5.3: Manage Tour Operations
+As an operations manager
+I want to track operational checklist for each tour
+So that I ensure nothing is missed
+Acceptance Criteria:
+
+Can view tour dashboard with checklist
+Tracks: rooming lists sent, flight manifest complete, transfers confirmed
+Tracks: supplier confirmations complete
+Can assign tour manager and on-site staff
+Can track staff costs
+Shows guest count and booking count
+Status: planning → confirmed → in_progress → completed
+
+Priority: P1 (Phase 1)
+US-5.4: Finalize Transfer Suppliers
+As an operations manager
+I want to finalize transfer suppliers after bookings are confirmed
+So that I can negotiate best rates with actual numbers
+Acceptance Criteria:
+
+Can view total seats/vehicles sold per route/date
+Can calculate estimated vehicles needed
+Can select supplier and enter actual cost
+Can mark as confirmed
+System recalculates margin automatically
+Can track confirmation date
+
+Priority: P1 (Phase 1)
+5.6 Epic 6: Corporate Features
+US-6.1: Create Corporate Booking
+As a sales team member
+I want to create bookings with corporate branding options
+So that I can serve B2B clients
+Acceptance Criteria:
+
+Can mark booking as corporate
+Can capture company name
+Can configure custom branding (logos, colors)
+Can add welcome packs with quantities and cost
+Can add custom merchandise
+Can assign dedicated account manager
+Can set custom invoice and payment terms
+
+Priority: P2 (Phase 2)
+US-6.2: Add Booking Fees
+As a finance staff member
+I want to add service fees and credit card fees to bookings
+So that I can track all revenue
+Acceptance Criteria:
+
+Can add booking fee (fixed or percentage)
+Can add service fee (fixed or percentage)
+Can add credit card fee (percentage)
+System includes fees in total price
+Fees shown separately on invoices
+Can configure default fees per tenant
+
+Priority: P2 (Phase 2)
+5.7 Epic 7: Reporting & Analytics
+US-7.1: View Business Dashboard
+As a tour operator owner
+I want to see key business metrics at a glance
+So that I can make informed decisions
+Acceptance Criteria:
+
+Shows: total bookings, revenue, margin this month
+Shows: booking conversion rate
+Shows: pipeline value (quotes)
+Shows: upcoming tours and guest counts
+Shows: inventory utilization
+Can filter by date range, event, package
+
+Priority: P1 (Phase 1)
+US-7.2: Generate Financial Reports
+As a finance manager
+I want to generate detailed financial reports
+So that I can analyze profitability
+Acceptance Criteria:
+
+Can generate profit/loss by package
+Can generate revenue by event
+Can generate supplier payment summary
+Can generate margin analysis report
+Can export as Excel or PDF
+Can filter by date range, event, supplier
+
+Priority: P1 (Phase 1)
+US-7.3: Track Inventory Utilization
+As an operations manager
+I want to see how much inventory is utilized
+So that I can optimize purchasing
+Acceptance Criteria:
+
+Shows: rooms allocated vs total contracted
+Shows: tickets sold vs total contracted
+Shows: transfer seats sold vs capacity
+Can drill down by property, event, date
+Shows utilization percentage
+Highlights low-utilization contracts
+
+Priority: P2 (Phase 2)
+
+6. Functional Requirements
+6.1 Core Platform Features
+6.1.1 Multi-Tenancy
+
+REQ-MT-001: System MUST support multiple tour operators (tenants) with complete data isolation
+REQ-MT-002: Each tenant MUST have unique subdomain (e.g., operator1.platform.com)
+REQ-MT-003: Tenant data MUST be scoped by tenant_id in all queries
+REQ-MT-004: System MUST prevent cross-tenant data access
+REQ-MT-005: Tenants MUST be able to configure their own branding (logo, colors, domain)
+
+6.1.2 User Management & Roles
+
+REQ-UM-001: System MUST support role-based access control (RBAC)
+REQ-UM-002: Default roles: Admin, Sales Manager, Sales Agent, Operations Manager, Finance Manager, Read-Only
+REQ-UM-003: Admins MUST be able to create custom roles with granular permissions
+REQ-UM-004: System MUST track created_by and updated_by on key entities
+REQ-UM-005: Users MUST be able to reset passwords via email
+REQ-UM-006: System MUST support two-factor authentication (2FA)
+
+6.1.3 Authentication & Security
+
+REQ-AUTH-001: System MUST use JWT tokens for authentication
+REQ-AUTH-002: Tokens MUST expire after 24 hours
+REQ-AUTH-003: System MUST support SSO (SAML 2.0) for enterprise clients
+REQ-AUTH-004: All passwords MUST be hashed with bcrypt (cost factor ≥12)
+REQ-AUTH-005: System MUST log all authentication attempts
+REQ-AUTH-006: System MUST lock accounts after 5 failed login attempts
+
+6.2 Event & Reference Data Management
+6.2.1 Sports & Events
+
+REQ-EVT-001: System MUST support multiple sports (F1, MotoGP, Football, Tennis, Golf, etc.)
+REQ-EVT-002: Events MUST have: name, sport, venue, start date, end date, status
+REQ-EVT-003: System MUST support tournaments (e.g., F1 World Championship 2026)
+REQ-EVT-004: Events MUST link to tournaments (optional)
+REQ-EVT-005: System MUST support team-based events (home team vs visiting team)
+REQ-EVT-006: Events MUST have status: active, cancelled, completed, sold_out
+REQ-EVT-007: System MUST prevent deletion of events with existing bookings
+
+6.2.2 Venues
+
+REQ-VEN-001: Venues MUST have: name, type, city, country, capacity, coordinates
+REQ-VEN-002: Venues MUST be tenant-scoped (operators can create their own)
+REQ-VEN-003: System MUST display venues on map (lat/long)
+
+6.3 Supplier Management
+6.3.1 Supplier CRUD
+
+REQ-SUP-001: System MUST support supplier types: accommodation, tickets, transport, flights, other
+REQ-SUP-002: Suppliers MUST have: code (unique per tenant), name, contact details, payment terms
+REQ-SUP-003: System MUST support multiple contacts per supplier
+REQ-SUP-004: Suppliers MUST have default currency
+REQ-SUP-005: System MUST support supplier commission tracking (percentage or fixed amount)
+
+6.3.2 Supplier Contracts (Future Phase)
+
+REQ-SUP-006: System SHOULD support supplier contract documents (upload PDF)
+REQ-SUP-007: System SHOULD track contract start/end dates
+REQ-SUP-008: System SHOULD alert when contracts are expiring
+
+6.4 Accommodation Management
+6.4.1 Properties & Room Types
+
+REQ-ACC-001: System MUST support accommodation types: hotel, villa, apartment, camping, glamping
+REQ-ACC-002: Properties MUST have: name, star rating, city, country, coordinates, amenities, images
+REQ-ACC-003: Room types MUST have: name, bed configuration (double/twin/flexible), max occupancy
+REQ-ACC-004: System MUST prevent deletion of properties with active contracts
+
+6.4.2 Accommodation Contracts
+
+REQ-ACC-005: Contracts MUST have: check-in date, check-out date, minimum stay nights
+REQ-ACC-006: Contracts MUST have: release date, rooming list due date
+REQ-ACC-007: Contracts MUST support room allocations (e.g., 70 standard, 30 deluxe)
+REQ-ACC-008: System MUST track contract status: draft, active, released, completed
+REQ-ACC-009: System MUST prevent bookings after contract release date without override permission
+
+6.4.3 Accommodation Pricing
+
+REQ-ACC-010: System MUST support occupancy-based pricing (single, double, triple, quad)
+REQ-ACC-011: System MUST support extra person charges
+REQ-ACC-012: System MUST support board basis options (room only, breakfast, half board, full board, all-inclusive)
+REQ-ACC-013: Board basis MUST be configurable as included or additional cost per person per night
+REQ-ACC-014: System MUST support additional charges (city tax, VAT, resort fees, service charges)
+REQ-ACC-015: Charges MUST be configurable as: per person per night, per room per night, percentage, fixed per stay
+REQ-ACC-016: System MUST support extra night rates (before/after contract dates)
+REQ-ACC-017: Extra nights MUST have status: contracted, on_request, estimated
+
+6.4.4 Inventory Allocation
+
+REQ-ACC-018: System MUST prevent allocation beyond total contracted rooms
+REQ-ACC-019: System MUST support provisional allocations with 15-minute expiry
+REQ-ACC-020: System MUST auto-release expired provisional allocations
+REQ-ACC-021: System MUST use database locking to prevent race conditions
+REQ-ACC-022: System MUST track allocation status: provisional, confirmed, released
+REQ-ACC-023: System MUST calculate rooms available in real-time
+
+6.5 Ticket Management
+6.5.1 Ticket Categories & Products
+
+REQ-TKT-001: System MUST support ticket categories (Grandstand, VIP, Hospitality, Paddock Club, etc.)
+REQ-TKT-002: Tickets MUST have: name, category, description, includes, restrictions
+REQ-TKT-003: Tickets MUST support valid dates (e.g., 3-day pass vs race day only)
+REQ-TKT-004: System MUST prevent deletion of tickets with existing inventory
+
+6.5.2 Ticket Inventory
+
+REQ-TKT-005: System MUST support three inventory types:
+
+Contracted: Fixed quantity, tracked allocations
+Free-sell: Unlimited quantity, no allocation tracking
+Buy-to-order: Requires confirmation before selling
+
+
+REQ-TKT-006: Contracted inventory MUST track: total quantity, allocated quantity, available quantity
+REQ-TKT-007: System MUST support multiple suppliers per ticket with different costs
+REQ-TKT-008: System MUST prioritize lower-cost suppliers automatically
+REQ-TKT-009: Inventory MUST have: cost per ticket, supplier commission, delivery method
+REQ-TKT-010: System MUST prevent overselling contracted inventory
+
+6.5.3 Ticket Allocation
+
+REQ-TKT-011: System MUST allocate from lowest-cost available inventory first
+REQ-TKT-012: System MUST support provisional allocations with expiry
+REQ-TKT-013: System MUST handle concurrent allocations safely (locking)
+REQ-TKT-014: System MUST calculate ticket availability in real-time
+
+6.6 Transfer Management
+6.6.1 Transfer Routes
+
+REQ-TRF-001: System MUST support transfer types: airport, venue, intercity
+REQ-TRF-002: Routes MUST have: origin, destination, distance, estimated duration
+REQ-TRF-003: Routes MUST support direction: inbound, outbound, round_trip, one_way
+REQ-TRF-004: Routes MUST have operates_on_dates (array of dates)
+REQ-TRF-005: Routes MUST have pickup/dropoff instructions
+
+6.6.2 Vehicle Types & Pricing
+
+REQ-TRF-006: System MUST support vehicle types (coach, minibus, private car, luxury vehicle)
+REQ-TRF-007: Vehicles MUST have capacity
+REQ-TRF-008: System MUST support pricing types: per_seat or per_vehicle
+REQ-TRF-009: Pricing MUST be based on estimated costs (free-sell model)
+REQ-TRF-010: System MUST allow max bookable quantity (optional)
+
+6.6.3 Sales Tracking & Finalization
+
+REQ-TRF-011: System MUST track seats sold per route per date
+REQ-TRF-012: System MUST track vehicles sold per route per date
+REQ-TRF-013: System MUST calculate estimated vehicles needed based on capacity
+REQ-TRF-014: Operations MUST be able to finalize supplier and actual cost later
+REQ-TRF-015: System MUST recalculate margin when actual cost is entered
+REQ-TRF-016: System MUST track supplier confirmation status and date
+
+6.7 Flight Management
+6.7.1 Flight Entry
+
+REQ-FLT-001: System MUST support two sources: API and manual
+REQ-FLT-002: Manual flights MUST capture: airline, flight number, airports, times, cost
+REQ-FLT-003: API flights MUST integrate with GDS or flight aggregators (Phase 2)
+REQ-FLT-004: Flights MUST have: cabin class, baggage allowance, booking reference
+REQ-FLT-005: Flights MUST have status: quoted, booked, ticketed, cancelled
+REQ-FLT-006: System MUST support cost per passenger
+
+6.7.2 Flight Management
+
+REQ-FLT-007: System MUST track ticket numbers (array)
+REQ-FLT-008: System MUST track ticket issue date
+REQ-FLT-009: System MUST support fare rules storage
+REQ-FLT-010: System MUST prevent deletion of flights linked to bookings
+
+6.8 Extras/Add-Ons Management
+6.8.1 Product Extras
+
+REQ-EXT-001: System MUST support extra categories: experience, dining, yacht, excursion, adventure, insurance, parking, hospitality, branding, concierge, photo/video, luggage, chauffeur, other
+REQ-EXT-002: Extras MUST have: name, category, description, cost price
+REQ-EXT-003: Extras MUST have inventory type: limited, unlimited, on_request
+REQ-EXT-004: Limited inventory MUST track: total quantity, quantity sold
+REQ-EXT-005: System MUST prevent overselling limited extras
+REQ-EXT-006: Extras MUST support max per booking limit
+REQ-EXT-007: Extras MUST support required details (JSONB field for custom data collection)
+
+6.9 Package Management
+6.9.1 Tours & Package Categories
+
+REQ-PKG-001: Tours MUST link to events
+REQ-PKG-002: Tours MUST have: name, slug (unique per tenant), description, highlights, inclusions, exclusions, terms
+REQ-PKG-003: Tours MUST have status: draft, active, paused, sold_out, archived
+REQ-PKG-004: Tours MUST support images (array)
+REQ-PKG-005: Tours MUST have booking open/close dates
+REQ-PKG-006: Package categories MUST belong to tours
+REQ-PKG-007: Categories MUST have: name, slug (unique per tour), sort order
+
+6.9.2 Package Building
+
+REQ-PKG-008: Packages MUST belong to categories
+REQ-PKG-009: Packages MUST have: name, slug, package code, description, duration nights
+REQ-PKG-010: Packages MUST support max guests limit
+REQ-PKG-011: System MUST support unlimited components per package
+REQ-PKG-012: Components MUST have types: accommodation, ticket, venue_transfer, airport_transfer, flight, extra
+REQ-PKG-013: Components MUST be marked as mandatory or optional
+REQ-PKG-014: Components MUST be marked as included in base price or add-on
+REQ-PKG-015: Components MUST have sort order for display
+
+6.9.3 Component Configuration
+
+REQ-PKG-016: Accommodation components MUST reference: contract, allocation, room type, board basis
+REQ-PKG-017: Accommodation components MUST have: check-in/out dates, nights, default occupancy
+REQ-PKG-018: Accommodation components MUST have: base costs per occupancy, markup percentage
+REQ-PKG-019: Accommodation components MUST support extra nights before/after
+REQ-PKG-020: Ticket components MUST reference: ticket, inventory
+REQ-PKG-021: Ticket components MUST have: quantity per guest, cost, markup percentage
+REQ-PKG-022: Transfer components MUST reference: route, pricing, vehicle type
+REQ-PKG-023: Transfer components MUST have: dates (array), estimated cost, markup percentage
+REQ-PKG-024: Flight components MUST support: outbound flight, return flight, or manual entry
+REQ-PKG-025: Flight components MUST have: cost per passenger, markup percentage
+REQ-PKG-026: Extra components MUST reference: extra product
+REQ-PKG-027: Extra components MUST have: quantity included, cost, markup percentage
+
+6.9.4 Pricing Calculation
+
+REQ-PKG-028: System MUST calculate package price as: total_cost × (1 + markup%) for each component
+REQ-PKG-029: System MUST sum all component prices for total package price
+REQ-PKG-030: System MUST support manual price override
+REQ-PKG-031: System MUST display both calculated and manual prices
+REQ-PKG-032: System MUST support pricing per occupancy type (single, double, triple)
+REQ-PKG-033: System MUST recalculate pricing when components change
+REQ-PKG-034: System MUST store package pricing with effective dates
+
+6.10 Quote Management
+6.10.1 Quote Creation
+
+REQ-QTE-001: Sales MUST be able to create quotes from packages
+REQ-QTE-002: Quotes MUST have: quote number (auto-generated unique), customer details, number of guests
+REQ-QTE-003: Quotes MUST calculate: total cost, total price
+REQ-QTE-004: Quotes MUST have status: draft, sent, accepted, declined, expired
+REQ-QTE-005: Quotes MUST have valid until date
+REQ-QTE-006: System MUST auto-expire quotes after valid until date
+REQ-QTE-007: Sales MUST be able to customize quote (add/remove components, adjust pricing)
+REQ-QTE-008: System MUST track who created quote and when
+REQ-QTE-009: System MUST track when quote was sent
+
+6.10.2 Quote Presentation
+
+REQ-QTE-010: System MUST generate quote PDF with branding
+REQ-QTE-011: Quote PDF MUST include: package details, pricing breakdown, terms & conditions
+REQ-QTE-012: System MUST send quote via email to customer
+REQ-QTE-013: Quote email MUST include PDF attachment
+REQ-QTE-014: System MUST support custom email templates per tenant
+
+6.10.3 Quote to Booking Conversion
+
+REQ-QTE-015: System MUST allow one-click conversion from accepted quote to booking
+REQ-QTE-016: Conversion MUST create booking with same details
+REQ-QTE-017: Conversion MUST allocate inventory automatically
+REQ-QTE-018: Conversion MUST generate booking reference
+REQ-QTE-019: Conversion MUST send booking confirmation email
+
+6.11 Booking Management
+6.11.1 Booking Creation
+
+REQ-BKG-001: System MUST support booking creation from quotes or directly from packages
+REQ-BKG-002: Bookings MUST have: booking reference (auto-generated unique), customer details, number of guests
+REQ-BKG-003: Bookings MUST calculate: total cost, total price, gross margin, margin percentage
+REQ-BKG-004: Bookings MUST have status: provisional, confirmed, cancelled, completed
+REQ-BKG-005: System MUST track who created booking and when
+REQ-BKG-006: System MUST track booking date and travel date
+
+6.11.2 Guest Management
+
+REQ-BKG-007: Bookings MUST support multiple guests
+REQ-BKG-008: Guests MUST have: type (adult/child/infant), name, DOB, age at travel
+REQ-BKG-009: Guests MUST support: passport details, nationality, dietary requirements, special requests
+REQ-BKG-010: System MUST mark one guest as lead guest
+REQ-BKG-011: System MUST validate guest details based on package requirements
+REQ-BKG-012: System MUST support bulk guest import from CSV
+
+6.11.3 Booking Components (Snapshot)
+
+REQ-BKG-013: System MUST create component snapshot at time of booking
+REQ-BKG-014: Snapshots MUST be stored in strongly-typed tables per component type
+REQ-BKG-015: Snapshots MUST include: quantity, cost per unit, selling price per unit, total cost, total price
+REQ-BKG-016: Snapshots MUST preserve pricing even if package pricing changes later
+REQ-BKG-017: Accommodation snapshots MUST include: room type, dates, nights
+REQ-BKG-018: Ticket snapshots MUST include: ticket name, category
+REQ-BKG-019: Transfer snapshots MUST include: route name, type, date
+REQ-BKG-020: Flight snapshots MUST include: flight details
+REQ-BKG-021: Extra snapshots MUST include: extra name
+
+6.11.4 Inventory Allocation
+
+REQ-BKG-022: System MUST allocate inventory when booking is created
+REQ-BKG-023: Allocations MUST be provisional initially (15-minute hold)
+REQ-BKG-024: System MUST confirm allocations when deposit is received
+REQ-BKG-025: System MUST release allocations if booking is cancelled
+REQ-BKG-026: System MUST auto-release provisional allocations after expiry
+REQ-BKG-027: Accommodation allocations MUST reference: allocation_id, rooms allocated, dates
+REQ-BKG-028: Ticket allocations MUST reference: inventory_id, quantity allocated
+
+6.11.5 Payment Management
+
+REQ-BKG-029: System MUST track payments per booking
+REQ-BKG-030: Payments MUST have type: deposit, balance, refund, amendment
+REQ-BKG-031: Payments MUST have: amount, currency, payment method, payment date, reference
+REQ-BKG-032: Payments MUST have status: pending, completed, failed, refunded
+REQ-BKG-033: System MUST calculate outstanding balance automatically
+REQ-BKG-034: System MUST auto-confirm booking when deposit is received
+REQ-BKG-035: System MUST support partial payments
+REQ-BKG-036: System MUST generate payment receipts
+
+6.11.6 Booking Fees
+
+REQ-BKG-037: System MUST support booking fees (fixed or percentage)
+REQ-BKG-038: System MUST support service fees (fixed or percentage)
+REQ-BKG-039: System MUST support credit card fees (percentage)
+REQ-BKG-040: Fees MUST be included in total price calculation
+REQ-BKG-041: Fees MUST be shown separately on invoices
+REQ-BKG-042: System MUST support configurable default fees per tenant
+
+6.11.7 Corporate Bookings
+
+REQ-BKG-043: System MUST support marking bookings as corporate
+REQ-BKG-044: Corporate bookings MUST capture company name
+REQ-BKG-045: System MUST support corporate branding options (logos, colors, custom merchandise)
+REQ-BKG-046: System MUST support welcome packs (quantity and cost)
+REQ-BKG-047: System MUST support assigning dedicated account manager
+REQ-BKG-048: System MUST support custom invoice terms
+REQ-BKG-049: System MUST support custom payment terms
+
+6.11.8 Booking Amendments
+
+REQ-BKG-050: System MUST support modifying bookings after confirmation
+REQ-BKG-051: Amendments MUST allow: adding/removing components, changing dates, adding/removing guests
+REQ-BKG-052: System MUST recalculate pricing on amendments
+REQ-BKG-053: System MUST track amendment history
+REQ-BKG-054: System MUST support amendment fees
+
+6.11.9 Booking Cancellation
+
+REQ-BKG-055: System MUST support booking cancellation
+REQ-BKG-056: Cancellation MUST release all allocated inventory
+REQ-BKG-057: System MUST apply cancellation policy (future)
+REQ-BKG-058: System MUST track cancellation date and reason
+REQ-BKG-059: System MUST prevent deletion of cancelled bookings (soft delete)
+
+6.11.10 Status Management
+
+REQ-BKG-060: System MUST track booking status history (from → to, when, who)
+REQ-BKG-061: Status transitions:
+
+Provisional → Confirmed (when deposit received)
+Confirmed → Cancelled (when cancelled)
+Confirmed → Completed (after travel date)
+
+
+REQ-BKG-062: System MUST auto-complete bookings after travel date
+REQ-BKG-063: System MUST prevent modifications to completed bookings
+
+6.12 Communication & Documents
+6.12.1 Communications Log
+
+REQ-COM-001: System MUST log all communications with customers
+REQ-COM-002: Communications MUST have type: email, phone, sms, note, whatsapp
+REQ-COM-003: Communications MUST have direction: inbound, outbound
+REQ-COM-004: Communications MUST capture: subject, message, timestamp, user
+REQ-COM-005: System MUST link communications to bookings and quotes
+REQ-COM-006: System MUST display communications timeline
+
+6.12.2 Document Management
+
+REQ-DOC-001: System MUST generate booking documents automatically
+REQ-DOC-002: Document types: invoice, voucher, confirmation, rooming_list, itinerary
+REQ-DOC-003: System MUST store documents with: name, file URL, size, mime type
+REQ-DOC-004: System MUST track when documents were generated
+REQ-DOC-005: System MUST track when documents were sent to customer
+REQ-DOC-006: System MUST support regenerating documents
+REQ-DOC-007: Documents MUST use tenant branding
+
+6.12.3 Email Notifications
+
+REQ-EMAIL-001: System MUST send email on: quote created, booking confirmed, payment received, documents ready
+REQ-EMAIL-002: Emails MUST use tenant-branded templates
+REQ-EMAIL-003: System MUST support custom email templates per tenant
+REQ-EMAIL-004: System MUST track email delivery status
+REQ-EMAIL-005: System MUST support email attachments (PDFs)
+
+6.13 Operational Management
+6.13.1 Tour Operations Dashboard
+
+REQ-OPS-001: System MUST provide tour operations dashboard
+REQ-OPS-002: Dashboard MUST show: departure date, total guests, total bookings
+REQ-OPS-003: Dashboard MUST track operational checklist:
+
+Rooming lists completed and sent
+Flight manifests completed
+Transfer manifests completed
+Supplier confirmations complete
+
+
+REQ-OPS-004: System MUST allow assigning tour manager
+REQ-OPS-005: System MUST track tour status: planning, confirmed, in_progress, completed
+
+6.13.2 Staff Allocations
+
+REQ-OPS-006: System MUST track staff allocations per tour
+REQ-OPS-007: Staff types: tour_manager, on_site_rep, driver, guide, coordinator
+REQ-OPS-008: System MUST track: staff name, role, start date, end date, days count
+REQ-OPS-009: System MUST track: cost per day, total cost
+REQ-OPS-010: System MUST calculate total staff cost per tour
+
+6.13.3 Rooming Lists
+
+REQ-OPS-011: System MUST generate rooming lists per property
+REQ-OPS-012: Rooming lists MUST include: guest names, check-in/out dates, room types, special requests
+REQ-OPS-013: System MUST export rooming lists as Excel or PDF
+REQ-OPS-014: System MUST track when rooming lists were sent to hotels
+REQ-OPS-015: System MUST support re-generating rooming lists after changes
+
+6.13.4 Transfer Manifests
+
+REQ-OPS-016: System MUST generate transfer manifests per route/date
+REQ-OPS-017: Manifests MUST include: passenger names, pickup locations, special requirements
+REQ-OPS-018: System MUST calculate vehicles needed based on capacity
+REQ-OPS-019: System MUST allow assigning vehicles to passengers
+REQ-OPS-020: System MUST track when manifests were sent to suppliers
+REQ-OPS-021: System MUST export manifests as Excel or PDF
+
+6.13.5 Flight Manifests
+
+REQ-OPS-022: System MUST generate flight manifests per flight
+REQ-OPS-023: Manifests MUST include: passenger names, passport details, ticket numbers
+REQ-OPS-024: System MUST export manifests as Excel or PDF
+
+6.14 Reporting & Analytics
+6.14.1 Business Dashboard
+
+REQ-RPT-001: System MUST provide business dashboard for owners/managers
+REQ-RPT-002: Dashboard MUST show: total bookings, revenue, margin (this month)
+REQ-RPT-003: Dashboard MUST show: booking conversion rate
+REQ-RPT-004: Dashboard MUST show: pipeline value (quotes)
+REQ-RPT-005: Dashboard MUST show: upcoming tours and guest counts
+REQ-RPT-006: Dashboard MUST show: inventory utilization
+REQ-RPT-007: Dashboard MUST support date range filtering
+REQ-RPT-008: Dashboard MUST update in real-time
+
+6.14.2 Financial Reports
+
+REQ-RPT-009: System MUST generate profit/loss by package report
+REQ-RPT-010: System MUST generate revenue by event report
+REQ-RPT-011: System MUST generate supplier payment summary report
+REQ-RPT-012: System MUST generate margin analysis report
+REQ-RPT-013: Reports MUST be exportable as Excel or PDF
+REQ-RPT-014: Reports MUST support filtering by date range, event, supplier
+
+6.14.3 Inventory Reports
+
+REQ-RPT-015: System MUST generate accommodation utilization report
+REQ-RPT-016: System MUST generate ticket utilization report
+REQ-RPT-017: System MUST generate transfer capacity report
+REQ-RPT-018: Reports MUST show: allocated vs total contracted
+REQ-RPT-019: Reports MUST highlight low-utilization contracts
+
+6.14.4 Sales Reports
+
+REQ-RPT-020: System MUST generate sales pipeline report
+REQ-RPT-021: System MUST generate conversion rate report
+REQ-RPT-022: System MUST generate sales by agent report
+REQ-RPT-023: System MUST generate average booking value report
+
+
+7. Technical Requirements
+7.1 Architecture
+7.1.1 System Architecture
+
+REQ-ARCH-001: System MUST use microservices or modular monolith architecture
+REQ-ARCH-002: System MUST separate: API layer, business logic layer, data access layer
+REQ-ARCH-003: Frontend MUST be decoupled from backend (RESTful API)
+REQ-ARCH-004: System MUST support horizontal scaling
+REQ-ARCH-005: System MUST use containerization (Docker recommended)
+
+7.1.2 Technology Stack
+
+REQ-TECH-001: Backend MUST use: Node.js, Python, Go, or .NET Core
+REQ-TECH-002: Database MUST be PostgreSQL (version 14+)
+REQ-TECH-003: Frontend MUST use: React, Vue.js, or Angular
+REQ-TECH-004: System MUST use Redis for caching
+REQ-TECH-005: System MUST use message queue for async processing (e.g., RabbitMQ, AWS SQS)
+REQ-TECH-006: System MUST use S3 or equivalent for file storage
+
+7.2 Database
+7.2.1 Database Design
+
+REQ-DB-001: System MUST use provided PostgreSQL schema (see schema document)
+REQ-DB-002: All tables MUST have: id (UUID), created_at, updated_at
+REQ-DB-003: Business tables MUST have: tenant_id for multi-tenancy
+REQ-DB-004: All tables MUST support soft deletes (deleted_at)
+REQ-DB-005: System MUST use database indexes as defined in schema
+REQ-DB-006: System MUST use materialized views for availability queries
+REQ-DB-007: Materialized views MUST refresh on allocation changes
+
+7.2.2 Data Integrity
+
+REQ-DB-008: System MUST use database constraints (foreign keys, check constraints, unique constraints)
+REQ-DB-009: System MUST use database transactions for multi-step operations
+REQ-DB-010: System MUST use SELECT FOR UPDATE for concurrent inventory allocation
+REQ-DB-011: System MUST use optimistic locking (version column) for inventory tables
+REQ-DB-012: System MUST validate tenant_id on all queries
+
+7.2.3 Database Performance
+
+REQ-DB-013: Queries MUST execute in <100ms (95th percentile)
+REQ-DB-014: Complex reports MUST execute in <2 seconds
+REQ-DB-015: System MUST use connection pooling
+REQ-DB-016: System MUST use query result caching where appropriate
+REQ-DB-017: Database MUST be backed up daily with 30-day retention
+
+7.3 API Design
+7.3.1 REST API
+
+REQ-API-001: API MUST follow RESTful principles
+REQ-API-002: API MUST use JSON for request/response bodies
+REQ-API-003: API MUST use standard HTTP methods (GET, POST, PUT, PATCH, DELETE)
+REQ-API-004: API MUST use standard HTTP status codes
+REQ-API-005: API MUST version endpoints (e.g., /api/v1/)
+REQ-API-006: API MUST support pagination (page, limit, offset)
+REQ-API-007: API MUST support filtering, sorting, searching
+REQ-API-008: API MUST return consistent error format:
+
+json  {
+    "error": {
+      "code": "VALIDATION_ERROR",
+      "message": "Invalid input",
+      "details": [...]
+    }
+  }
+```
+
+#### **7.3.2 API Authentication**
+- **REQ-API-009**: API MUST use JWT tokens in Authorization header (Bearer)
+- **REQ-API-010**: API MUST validate tenant from JWT token
+- **REQ-API-011**: API MUST return 401 for invalid/expired tokens
+- **REQ-API-012**: API MUST return 403 for insufficient permissions
+
+#### **7.3.3 API Documentation**
+- **REQ-API-013**: API MUST be documented with OpenAPI/Swagger
+- **REQ-API-014**: Documentation MUST include: endpoints, parameters, request/response schemas, examples
+- **REQ-API-015**: Documentation MUST be auto-generated from code
+
+### **7.4 Integration**
+
+#### **7.4.1 Webhook Support**
+- **REQ-INT-001**: System MUST support webhooks for key events
+- **REQ-INT-002**: Webhook events: booking.created, booking.confirmed, booking.cancelled, payment.received
+- **REQ-INT-003**: Webhooks MUST include signature for verification
+- **REQ-INT-004**: System MUST retry failed webhooks (3 attempts with exponential backoff)
+
+#### **7.4.2 Email Service**
+- **REQ-INT-005**: System MUST integrate with email service (SendGrid, AWS SES, or similar)
+- **REQ-INT-006**: System MUST support transactional emails
+- **REQ-INT-007**: System MUST support HTML email templates
+- **REQ-INT-008**: System MUST track email delivery status
+
+#### **7.4.3 Payment Gateway (Future Phase)**
+- **REQ-INT-009**: System SHOULD integrate with payment gateway (Stripe recommended)
+- **REQ-INT-010**: System SHOULD support credit card payments
+- **REQ-INT-011**: System SHOULD support bank transfers
+- **REQ-INT-012**: System SHOULD comply with PCI DSS (use tokenization)
+
+#### **7.4.4 Flight API (Phase 2)**
+- **REQ-INT-013**: System SHOULD integrate with flight APIs (Amadeus, Sabre, or aggregators)
+- **REQ-INT-014**: System SHOULD support flight search
+- **REQ-INT-015**: System SHOULD support flight booking
+- **REQ-INT-016**: System SHOULD support flight ticketing
+
+---
+
+## **8. Non-Functional Requirements**
+
+### **8.1 Performance**
+
+- **REQ-PERF-001**: System MUST load pages in <2 seconds (95th percentile)
+- **REQ-PERF-002**: API responses MUST be <500ms (95th percentile)
+- **REQ-PERF-003**: System MUST support 1,000 concurrent users
+- **REQ-PERF-004**: System MUST support 10,000 bookings per day
+- **REQ-PERF-005**: Database queries MUST execute in <100ms (95th percentile)
+- **REQ-PERF-006**: Materialized views MUST refresh in <10 seconds
+
+### **8.2 Scalability**
+
+- **REQ-SCALE-001**: System MUST scale horizontally (add more servers)
+- **REQ-SCALE-002**: Database MUST support read replicas for scaling reads
+- **REQ-SCALE-003**: System MUST use CDN for static assets
+- **REQ-SCALE-004**: System MUST use caching to reduce database load
+- **REQ-SCALE-005**: System MUST support multi-region deployment (future)
+
+### **8.3 Availability**
+
+- **REQ-AVAIL-001**: System MUST have 99.9% uptime (8.76 hours downtime/year max)
+- **REQ-AVAIL-002**: System MUST have automated health checks
+- **REQ-AVAIL-003**: System MUST have automated failover
+- **REQ-AVAIL-004**: System MUST have disaster recovery plan
+- **REQ-AVAIL-005**: Maintenance windows MUST be scheduled outside peak hours
+
+### **8.4 Security**
+
+- **REQ-SEC-001**: System MUST encrypt data in transit (TLS 1.3)
+- **REQ-SEC-002**: System MUST encrypt sensitive data at rest (AES-256)
+- **REQ-SEC-003**: System MUST hash passwords with bcrypt (cost ≥12)
+- **REQ-SEC-004**: System MUST implement rate limiting (prevent abuse)
+- **REQ-SEC-005**: System MUST log security events
+- **REQ-SEC-006**: System MUST comply with GDPR (data protection)
+- **REQ-SEC-007**: System MUST support data export (customer request)
+- **REQ-SEC-008**: System MUST support data deletion (right to be forgotten)
+- **REQ-SEC-009**: System MUST pass security audit before launch
+
+### **8.5 Reliability**
+
+- **REQ-REL-001**: System MUST have automated backups (daily)
+- **REQ-REL-002**: Backups MUST be tested monthly
+- **REQ-REL-003**: System MUST log all errors
+- **REQ-REL-004**: System MUST have error alerting (email, Slack, PagerDuty)
+- **REQ-REL-005**: Critical errors MUST alert on-call engineer immediately
+
+### **8.6 Maintainability**
+
+- **REQ-MAINT-001**: Code MUST follow style guide (linting enforced)
+- **REQ-MAINT-002**: Code MUST have test coverage ≥80%
+- **REQ-MAINT-003**: Code MUST have unit tests for business logic
+- **REQ-MAINT-004**: Code MUST have integration tests for APIs
+- **REQ-MAINT-005**: System MUST have monitoring dashboards (Grafana, Datadog, or similar)
+- **REQ-MAINT-006**: System MUST track key metrics (response time, error rate, throughput)
+
+### **8.7 Usability**
+
+- **REQ-USE-001**: UI MUST be responsive (mobile, tablet, desktop)
+- **REQ-USE-002**: UI MUST support modern browsers (Chrome, Firefox, Safari, Edge)
+- **REQ-USE-003**: UI MUST be accessible (WCAG 2.1 Level AA)
+- **REQ-USE-004**: System MUST provide contextual help/tooltips
+- **REQ-USE-005**: System MUST have searchable documentation
+
+### **8.8 Internationalization**
+
+- **REQ-I18N-001**: System SHOULD support multiple languages (English, Spanish, French, German)
+- **REQ-I18N-002**: System MUST support multiple currencies
+- **REQ-I18N-003**: System MUST support currency conversion with exchange rates
+- **REQ-I18N-004**: System MUST support date/time formatting per locale
+- **REQ-I18N-005**: System MUST support number formatting per locale (commas vs periods)
+
+---
+
+## **9. User Interface Requirements**
+
+### **9.1 Design Principles**
+
+- **REQ-UI-001**: UI MUST follow consistent design system
+- **REQ-UI-002**: UI MUST use clear visual hierarchy
+- **REQ-UI-003**: UI MUST provide immediate feedback on user actions
+- **REQ-UI-004**: UI MUST handle errors gracefully with clear messages
+- **REQ-UI-005**: UI MUST use loading states for async operations
+
+### **9.2 Key User Flows**
+
+#### **9.2.1 Quote Creation Flow**
+1. Sales clicks "Create Quote"
+2. System shows package selector (search/filter)
+3. Sales selects package
+4. System shows package details with components
+5. Sales customizes (optional): add/remove components, adjust pricing
+6. Sales enters customer details
+7. Sales previews quote PDF
+8. Sales sends quote via email
+9. System shows success message with quote number
+
+**Performance:** Must complete in <2 minutes
+
+#### **9.2.2 Booking Creation Flow**
+1. Sales creates quote (or customer books directly online)
+2. Customer accepts quote
+3. Sales clicks "Convert to Booking" (or system auto-converts for online)
+4. System allocates inventory (shows spinner)
+5. System generates booking reference
+6. System shows booking confirmation screen
+7. Sales/customer enters guest details
+8. Sales/customer processes payment (deposit)
+9. System confirms booking and sends emails
+
+**Performance:** Must complete in <3 minutes
+
+#### **9.2.3 Operational Planning Flow**
+1. Operations clicks "Tour Operations"
+2. System shows list of upcoming tours
+3. Operations clicks tour to open dashboard
+4. Dashboard shows: guest count, bookings, checklist status
+5. Operations clicks "Generate Rooming List"
+6. System generates and downloads Excel file
+7. Operations marks as sent to hotel
+8. Operations repeats for transfer manifests, flight manifests
+9. Operations marks suppliers as confirmed
+
+**Performance:** Each action <5 seconds
+
+### **9.3 Dashboard Requirements**
+
+#### **9.3.1 Business Dashboard**
+- **REQ-DASH-001**: MUST show KPI cards: total bookings, revenue, margin (this month)
+- **REQ-DASH-002**: MUST show charts: bookings over time, revenue by event, conversion funnel
+- **REQ-DASH-003**: MUST show upcoming tours table with guest counts
+- **REQ-DASH-004**: MUST show recent bookings list
+- **REQ-DASH-005**: MUST support date range selection
+- **REQ-DASH-006**: MUST refresh on demand (refresh button)
+
+#### **9.3.2 Sales Dashboard**
+- **REQ-DASH-007**: MUST show pipeline stages: draft quotes, sent quotes, accepted quotes, bookings
+- **REQ-DASH-008**: MUST show conversion rate (quotes → bookings)
+- **REQ-DASH-009**: MUST show sales by agent leaderboard
+- **REQ-DASH-010**: MUST show average booking value
+- **REQ-DASH-011**: MUST support filtering by date, agent, package
+
+#### **9.3.3 Operations Dashboard**
+- **REQ-DASH-012**: MUST show tours by departure date (calendar view)
+- **REQ-DASH-013**: MUST show operational checklist completion
+- **REQ-DASH-014**: MUST highlight tours with incomplete checklists
+- **REQ-DASH-015**: MUST show guest counts per tour
+- **REQ-DASH-016**: MUST provide quick actions: generate rooming list, generate manifests
+
+### **9.4 Mobile Requirements**
+
+- **REQ-MOB-001**: UI MUST be fully responsive on mobile devices
+- **REQ-MOB-002**: Mobile MUST support key flows: view bookings, view guest details, record payments
+- **REQ-MOB-003**: Mobile MUST support offline mode for viewing data (future phase)
+- **REQ-MOB-004**: Native mobile app (iOS/Android) is optional for Phase 3
+
+---
+
+## **10. Integration Requirements**
+
+### **10.1 Email Integration**
+
+- **REQ-EMAIL-INT-001**: System MUST integrate with SendGrid, AWS SES, or Mailgun
+- **REQ-EMAIL-INT-002**: System MUST send transactional emails: quote, booking confirmation, payment receipt, document ready
+- **REQ-EMAIL-INT-003**: System MUST use HTML templates with tenant branding
+- **REQ-EMAIL-INT-004**: System MUST track: sent, delivered, opened, clicked, bounced
+- **REQ-EMAIL-INT-005**: System MUST support email attachments (PDFs)
+
+### **10.2 Payment Gateway (Phase 2)**
+
+- **REQ-PAY-INT-001**: System SHOULD integrate with Stripe
+- **REQ-PAY-INT-002**: System SHOULD support credit card payments (Visa, Mastercard, Amex)
+- **REQ-PAY-INT-003**: System SHOULD support 3D Secure for compliance
+- **REQ-PAY-INT-004**: System SHOULD use tokenization (no storing card details)
+- **REQ-PAY-INT-005**: System SHOULD support webhooks for payment events
+- **REQ-PAY-INT-006**: System SHOULD handle payment failures gracefully
+
+### **10.3 Flight API (Phase 2)**
+
+- **REQ-FLIGHT-INT-001**: System SHOULD integrate with Amadeus, Sabre, or Duffel
+- **REQ-FLIGHT-INT-002**: System SHOULD support flight search (origin, destination, dates, passengers)
+- **REQ-FLIGHT-INT-003**: System SHOULD support flight booking
+- **REQ-FLIGHT-INT-004**: System SHOULD support flight ticketing (retrieve PNR)
+- **REQ-FLIGHT-INT-005**: System SHOULD cache flight search results (15 minutes)
+- **REQ-FLIGHT-INT-006**: System SHOULD fallback to manual entry if API fails
+
+### **10.4 Accounting Software (Phase 3)**
+
+- **REQ-ACC-INT-001**: System SHOULD integrate with QuickBooks, Xero, or Sage
+- **REQ-ACC-INT-002**: System SHOULD sync invoices automatically
+- **REQ-ACC-INT-003**: System SHOULD sync payments automatically
+- **REQ-ACC-INT-004**: System SHOULD sync supplier bills automatically
+- **REQ-ACC-INT-005**: System SHOULD support manual export if auto-sync fails
+
+### **10.5 CRM Integration (Phase 3)**
+
+- **REQ-CRM-INT-001**: System SHOULD integrate with Salesforce, HubSpot, or Pipedrive
+- **REQ-CRM-INT-002**: System SHOULD sync contacts/leads automatically
+- **REQ-CRM-INT-003**: System SHOULD sync quotes as opportunities
+- **REQ-CRM-INT-004**: System SHOULD update opportunity stage on quote status change
+
+### **10.6 Supplier Portal (Phase 3)**
+
+- **REQ-SUP-INT-001**: System SHOULD provide supplier portal
+- **REQ-SUP-INT-002**: Suppliers SHOULD receive confirmations via portal
+- **REQ-SUP-INT-003**: Suppliers SHOULD update availability via portal
+- **REQ-SUP-INT-004**: Suppliers SHOULD submit invoices via portal
+- **REQ-SUP-INT-005**: Suppliers SHOULD view payment status via portal
+
+---
+
+## **11. Data & Security Requirements**
+
+### **11.1 Data Protection**
+
+- **REQ-DATA-001**: System MUST comply with GDPR (EU)
+- **REQ-DATA-002**: System MUST comply with CCPA (California)
+- **REQ-DATA-003**: System MUST have privacy policy
+- **REQ-DATA-004**: System MUST obtain consent for marketing communications
+- **REQ-DATA-005**: System MUST support data export (customer request)
+- **REQ-DATA-006**: System MUST support data deletion (right to be forgotten)
+- **REQ-DATA-007**: System MUST anonymize deleted data (keep records for compliance)
+
+### **11.2 Data Backup & Recovery**
+
+- **REQ-BACKUP-001**: Database MUST be backed up daily (automated)
+- **REQ-BACKUP-002**: Backups MUST be retained for 30 days
+- **REQ-BACKUP-003**: Backups MUST be encrypted
+- **REQ-BACKUP-004**: Backups MUST be tested monthly (restore test)
+- **REQ-BACKUP-005**: System MUST support point-in-time recovery (PITR)
+- **REQ-BACKUP-006**: Recovery Time Objective (RTO): 4 hours
+- **REQ-BACKUP-007**: Recovery Point Objective (RPO): 24 hours
+
+### **11.3 Access Control**
+
+- **REQ-ACCESS-001**: System MUST use role-based access control (RBAC)
+- **REQ-ACCESS-002**: System MUST enforce principle of least privilege
+- **REQ-ACCESS-003**: System MUST support custom roles with granular permissions
+- **REQ-ACCESS-004**: System MUST log all access to sensitive data
+- **REQ-ACCESS-005**: System MUST require password complexity (8+ chars, uppercase, lowercase, number, special char)
+- **REQ-ACCESS-006**: System MUST enforce password expiry (90 days)
+- **REQ-ACCESS-007**: System MUST support two-factor authentication (2FA)
+
+### **11.4 Audit Logging**
+
+- **REQ-AUDIT-001**: System MUST log all changes to key entities (bookings, quotes, packages)
+- **REQ-AUDIT-002**: Logs MUST include: what changed, who changed it, when
+- **REQ-AUDIT-003**: Logs MUST be tamper-proof (append-only)
+- **REQ-AUDIT-004**: Logs MUST be retained for 7 years (compliance)
+- **REQ-AUDIT-005**: System MUST provide audit trail report
+
+### **11.5 Compliance**
+
+- **REQ-COMP-001**: System MUST comply with PCI DSS for payment card data (use tokenization)
+- **REQ-COMP-002**: System MUST comply with SOC 2 Type II (future)
+- **REQ-COMP-003**: System MUST pass annual security audit
+- **REQ-COMP-004**: System MUST have vulnerability scanning (monthly)
+- **REQ-COMP-005**: System MUST have penetration testing (annually)
+
+---
+
+## **12. Success Metrics**
+
+### **12.1 Business Metrics**
+
+| Metric | Target | Timeline |
+|--------|--------|----------|
+| **Monthly Recurring Revenue (MRR)** | $100K | Month 6 |
+| **Monthly Recurring Revenue (MRR)** | $500K | Month 12 |
+| **Annual Recurring Revenue (ARR)** | $10M | Month 24 |
+| **Number of Tenants** | 50 | Month 6 |
+| **Number of Tenants** | 500 | Month 12 |
+| **Customer Retention Rate** | 95% | Ongoing |
+| **Gross Booking Value (GBV)** | $50M/year | Month 12 |
+| **Gross Booking Value (GBV)** | $500M/year | Month 24 |
+
+### **12.2 Product Metrics**
+
+| Metric | Target | Measurement |
+|--------|--------|-------------|
+| **Quote Creation Time** | <15 min | From start to send |
+| **Booking Creation Time** | <5 min | From quote accept to confirmed |
+| **Operational Efficiency Gain** | 5x | Time to manage same # tours |
+| **Error Rate Reduction** | 80% | Manual errors (overbooking, pricing) |
+| **User Satisfaction (NPS)** | 50+ | Quarterly survey |
+| **Feature Adoption Rate** | 80% | % of tenants using core features |
+
+### **12.3 Technical Metrics**
+
+| Metric | Target | Monitoring |
+|--------|--------|------------|
+| **Page Load Time** | <2 sec (p95) | Real user monitoring |
+| **API Response Time** | <500ms (p95) | APM tool |
+| **Uptime** | 99.9% | Pingdom, UptimeRobot |
+| **Error Rate** | <0.1% | Error tracking (Sentry) |
+| **Database Query Time** | <100ms (p95) | Database monitoring |
+| **Test Coverage** | >80% | Code coverage tool |
+
+### **12.4 User Engagement Metrics**
+
+| Metric | Target | Tracking |
+|--------|--------|----------|
+| **Daily Active Users (DAU)** | 70% of total users | Analytics |
+| **Weekly Active Users (WAU)** | 90% of total users | Analytics |
+| **Average Session Duration** | >10 min | Analytics |
+| **Quotes Created per Sales Agent per Day** | 10+ | Product analytics |
+| **Bookings Confirmed per Day** | 100+ (all tenants) | Product analytics |
+
+---
+
+## **13. Implementation Phases**
+
+### **13.1 Phase 1: MVP (Months 0-6)**
+
+**Goal:** Launch with core features for F1 & Football operators
+
+#### **Features**
+✅ Multi-tenant platform setup  
+✅ User authentication & RBAC  
+✅ Supplier management  
+✅ Event & venue management  
+✅ Accommodation management (contracts, pricing, allocation)  
+✅ Ticket management (contracted, free-sell, buy-to-order)  
+✅ Transfer management (free-sell model)  
+✅ Package builder (component-based)  
+✅ Quote management (create, send, track)  
+✅ Booking management (create, guests, status, components)  
+✅ Payment tracking (manual entry)  
+✅ Inventory allocation (with concurrency protection)  
+✅ Basic reporting (business dashboard)  
+✅ Email notifications  
+✅ Document generation (invoices, confirmations)  
+
+#### **Deliverables**
+- Web application (responsive)
+- REST API
+- PostgreSQL database
+- Admin portal
+- User documentation
+- API documentation
+
+#### **Success Criteria**
+- 50 tenants onboarded
+- $100K MRR
+- 95% feature adoption
+- <10% error rate
+
+### **13.2 Phase 2: Growth (Months 6-12)**
+
+**Goal:** Scale to 500 operators with enhanced features
+
+#### **Features**
+✅ Flight management (API integration + manual)  
+✅ Corporate booking features  
+✅ Booking fees & service charges  
+✅ Enhanced operational tools (rooming lists, manifests)  
+✅ Staff allocation tracking  
+✅ Tour operations dashboard  
+✅ Advanced reporting & analytics  
+✅ Payment gateway integration (Stripe)  
+✅ Materialized views optimization  
+✅ Mobile-responsive enhancements  
+✅ Booking amendments  
+✅ Quote pipeline tracking  
+
+#### **Deliverables**
+- Enhanced web app
+- Flight API integration
+- Payment gateway integration
+- Advanced reporting module
+- Mobile app (optional)
+
+#### **Success Criteria**
+- 500 tenants onboarded
+- $500K MRR
+- 98% uptime
+- <5% error rate
+
+### **13.3 Phase 3: Enterprise (Months 12-18)**
+
+**Goal:** Become enterprise-grade platform with ecosystem
+
+#### **Features**
+✅ Supplier portal  
+✅ Customer self-service portal  
+✅ CRM integration (Salesforce, HubSpot)  
+✅ Accounting integration (QuickBooks, Xero)  
+✅ White-label options  
+✅ API marketplace (for third-party integrations)  
+✅ Advanced analytics (ML-based insights)  
+✅ Multi-region deployment  
+✅ Enhanced security (SOC 2 Type II)  
+✅ Native mobile apps (iOS, Android)  
+
+#### **Deliverables**
+- Supplier portal
+- Customer portal
+- API marketplace
+- White-label offering
+- Native mobile apps
+- SOC 2 Type II certification
+
+#### **Success Criteria**
+- 1,000+ tenants
+- $1M MRR
+- 99.95% uptime
+- SOC 2 compliant
+
+---
+
+## **14. Assumptions & Constraints**
+
+### **14.1 Assumptions**
+
+1. **Market Demand:** Tour operators are actively seeking modern software solutions
+2. **Willingness to Pay:** Average contract value of $50K-$250K/year is achievable
+3. **Data Migration:** Operators can export data from existing systems (or we provide migration service)
+4. **Internet Connectivity:** Users have reliable internet (cloud-based SaaS)
+5. **Browser Support:** Users have modern browsers (no IE11 support)
+6. **Payment Responsibility:** Operators handle customer payments initially (gateway optional)
+7. **Supplier Relationships:** Operators already have supplier relationships established
+8. **English Primary:** English is primary language (other languages Phase 2+)
+
+### **14.2 Constraints**
+
+#### **14.2.1 Technical Constraints**
+- Must use PostgreSQL (already designed schema)
+- Must be cloud-hosted (AWS, GCP, or Azure)
+- Must be accessible via web browser
+- Must support modern browsers only (Chrome, Firefox, Safari, Edge)
+
+#### **14.2.2 Budget Constraints**
+- Development budget: $500K for Phase 1
+- Total budget: $1.5M for Phases 1-2
+- Infrastructure costs must be <10% of revenue
+
+#### **14.2.3 Timeline Constraints**
+- MVP must launch within 6 months
+- Cannot delay core features for nice-to-haves
+- Must achieve product-market fit before scaling
+
+#### **14.2.4 Resource Constraints**
+- Development team: 6-8 developers (Phase 1)
+- Product/design team: 2-3 people
+- QA team: 2 people
+- DevOps: 1-2 people
+
+#### **14.2.5 Regulatory Constraints**
+- Must comply with GDPR (EU)
+- Must comply with CCPA (California)
+- Must comply with PCI DSS (if handling payments)
+- Must comply with local data residency laws
+
+### **14.3 Dependencies**
+
+1. **Third-Party Services:**
+   - Email service (SendGrid, AWS SES)
+   - File storage (AWS S3, GCP Cloud Storage)
+   - Payment gateway (Stripe) - Phase 2
+   - Flight API (Amadeus, Sabre, Duffel) - Phase 2
+
+2. **Internal Dependencies:**
+   - Database schema finalized (✅ completed)
+   - Design system established
+   - API contracts defined
+   - Test data prepared
+
+3. **External Dependencies:**
+   - Domain registration and SSL certificates
+   - Cloud infrastructure provisioning
+   - Security audit scheduling
+   - Legal review (terms of service, privacy policy)
+
+---
+
+## **15. Risks & Mitigations**
+
+### **15.1 Technical Risks**
+
+| Risk | Probability | Impact | Mitigation |
+|------|-------------|--------|------------|
+| **Database performance issues at scale** | Medium | High | Use materialized views, caching, read replicas; conduct load testing early |
+| **Inventory allocation race conditions** | Medium | High | Use database locking (SELECT FOR UPDATE), optimistic locking; thorough testing |
+| **Third-party API failures (flights)** | Medium | Medium | Implement circuit breakers, fallback to manual entry; use multiple providers |
+| **Security vulnerability exploited** | Low | Critical | Regular security audits, penetration testing; follow OWASP guidelines |
+| **Data loss due to corruption** | Low | Critical | Automated daily backups, PITR enabled; monthly restore tests |
+
+### **15.2 Business Risks**
+
+| Risk | Probability | Impact | Mitigation |
+|------|-------------|--------|------------|
+| **Low market adoption** | Medium | Critical | Conduct user research; build MVP quickly for feedback; pivot if needed |
+| **Competitor launches similar product** | High | High | Focus on niche (sports events); build strong relationships; move fast |
+| **Pricing too high/low** | Medium | Medium | Start with pilot customers; iterate on pricing; offer flexible plans |
+| **Churn due to poor UX** | Medium | High | Invest in UX design; conduct usability testing; gather user feedback |
+| **Dependency on key customers** | Medium | Medium | Diversify customer base; avoid >10% revenue from single customer |
+
+### **15.3 Operational Risks**
+
+| Risk | Probability | Impact | Mitigation |
+|------|-------------|--------|------------|
+| **Key team member leaves** | Medium | High | Document everything; cross-train team; have backup resources |
+| **Infrastructure outage** | Low | High | Use cloud provider with SLA; implement redundancy; have runbooks |
+| **Scope creep delays launch** | High | High | Strict prioritization; defer non-MVP features; regular stakeholder alignment |
+| **Insufficient customer support** | Medium | Medium | Build self-service documentation; hire support team early; use ticketing system |
+| **Data migration failures** | Medium | Medium | Provide migration tools; offer white-glove service; thorough testing |
+
+### **15.4 Compliance Risks**
+
+| Risk | Probability | Impact | Mitigation |
+|------|-------------|--------|------------|
+| **GDPR non-compliance** | Low | Critical | Legal review; implement required features (data export, deletion); privacy policy |
+| **PCI DSS non-compliance** | Low | High | Use tokenization (Stripe); never store card details; annual audit |
+| **Data breach** | Low | Critical | Encryption (transit & rest); access controls; incident response plan |
+| **SOC 2 audit failure** | Medium | High | Start preparation early; hire compliance expert; use compliance tools |
+
+---
+
+## **16. Appendices**
+
+### **16.1 Glossary**
+
+| Term | Definition |
+|------|------------|
+| **Allocation** | Reserved inventory (rooms, tickets) for a quote or booking |
+| **Board Basis** | Meal plan (room only, breakfast, half board, full board, all-inclusive) |
+| **Buy-to-Order** | Inventory model where tickets are purchased only after customer confirms |
+| **Component** | Building block of a package (accommodation, ticket, transfer, flight, extra) |
+| **Contracted Inventory** | Fixed quantity of inventory purchased upfront from supplier |
+| **Free-Sell** | Inventory model where quantity is unlimited (supplier confirms later) |
+| **Gross Margin** | Total price minus total cost |
+| **Manifest** | List of passengers for flights or transfers |
+| **Markup** | Percentage added to cost to determine selling price |
+| **Occupancy** | Number of guests staying in a room (single, double, triple, etc.) |
+| **Package** | Collection of components sold together as a tour |
+| **Provisional** | Temporary status (e.g., provisional allocation, provisional booking) |
+| **Quote** | Price proposal sent to customer before booking |
+| **Rooming List** | List of guests with room assignments sent to hotel |
+| **Tour Operator** | Company that organizes and sells tour packages |
+
+### **16.2 Acronyms**
+
+| Acronym | Meaning |
+|---------|---------|
+| **API** | Application Programming Interface |
+| **ARR** | Annual Recurring Revenue |
+| **B2B** | Business-to-Business |
+| **B2C** | Business-to-Consumer |
+| **CCPA** | California Consumer Privacy Act |
+| **CDN** | Content Delivery Network |
+| **CRM** | Customer Relationship Management |
+| **CRUD** | Create, Read, Update, Delete |
+| **GBV** | Gross Booking Value |
+| **GDPR** | General Data Protection Regulation |
+| **GDS** | Global Distribution System |
+| **JWT** | JSON Web Token |
+| **KPI** | Key Performance Indicator |
+| **MRR** | Monthly Recurring Revenue |
+| **MVP** | Minimum Viable Product |
+| **NPS** | Net Promoter Score |
+| **PCI DSS** | Payment Card Industry Data Security Standard |
+| **PITR** | Point-in-Time Recovery |
+| **PRD** | Product Requirements Document |
+| **RBAC** | Role-Based Access Control |
+| **REST** | Representational State Transfer |
+| **RPO** | Recovery Point Objective |
+| **RTO** | Recovery Time Objective |
+| **SaaS** | Software as a Service |
+| **SOC 2** | Service Organization Control 2 |
+| **SSO** | Single Sign-On |
+| **TLS** | Transport Layer Security |
+| **UUID** | Universally Unique Identifier |
+| **WCAG** | Web Content Accessibility Guidelines |
+
+### **16.3 Database Schema Reference**
+
+See separate document: **"Enterprise Tour Operator Schema v1.0"**
+
+The complete PostgreSQL schema includes:
+- 70+ tables covering all entities
+- Indexes for performance optimization
+- Foreign key constraints for data integrity
+- Check constraints for validation
+- Materialized views for availability
+- Functions for concurrency-safe allocation
+- Triggers for automatic updates
+- Complete multi-tenant support
+
+### **16.4 API Endpoints Reference**
+
+#### **Authentication**
+```
+POST   /api/v1/auth/login
+POST   /api/v1/auth/logout
+POST   /api/v1/auth/refresh
+POST   /api/v1/auth/reset-password
+```
+
+#### **Packages**
+```
+GET    /api/v1/packages
+GET    /api/v1/packages/:id
+POST   /api/v1/packages
+PUT    /api/v1/packages/:id
+DELETE /api/v1/packages/:id
+GET    /api/v1/packages/:id/components
+POST   /api/v1/packages/:id/components
+GET    /api/v1/packages/:id/pricing
+```
+
+#### **Quotes**
+```
+GET    /api/v1/quotes
+GET    /api/v1/quotes/:id
+POST   /api/v1/quotes
+PUT    /api/v1/quotes/:id
+DELETE /api/v1/quotes/:id
+POST   /api/v1/quotes/:id/send
+POST   /api/v1/quotes/:id/convert-to-booking
+```
+
+#### **Bookings**
+```
+GET    /api/v1/bookings
+GET    /api/v1/bookings/:id
+POST   /api/v1/bookings
+PUT    /api/v1/bookings/:id
+DELETE /api/v1/bookings/:id
+GET    /api/v1/bookings/:id/guests
+POST   /api/v1/bookings/:id/guests
+GET    /api/v1/bookings/:id/payments
+POST   /api/v1/bookings/:id/payments
+GET    /api/v1/bookings/:id/documents
+POST   /api/v1/bookings/:id/documents/generate
+```
+
+#### **Inventory**
+```
+GET    /api/v1/inventory/accommodation/availability
+GET    /api/v1/inventory/tickets/availability
+POST   /api/v1/inventory/accommodation/allocate
+POST   /api/v1/inventory/tickets/allocate
+DELETE /api/v1/inventory/allocations/:id
+```
+
+#### **Operations**
+```
+GET    /api/v1/operations/tours
+GET    /api/v1/operations/tours/:id
+POST   /api/v1/operations/rooming-lists/generate
+GET    /api/v1/operations/rooming-lists/:id
+POST   /api/v1/operations/manifests/transfer/generate
+POST   /api/v1/operations/manifests/flight/generate
+```
+
+#### **Reports**
+```
+GET    /api/v1/reports/dashboard
+GET    /api/v1/reports/financial/profit-loss
+GET    /api/v1/reports/financial/margin-analysis
+GET    /api/v1/reports/inventory/utilization
+GET    /api/v1/reports/sales/pipeline
+(Full API documentation to be provided in OpenAPI/Swagger format)
+16.5 User Personas
+Persona 1: Tour Operator Owner - Sarah
+
+Age: 45
+Company: Premium F1 Experiences (20 staff, $10M revenue)
+Goals: Grow business 2x without doubling staff; gain visibility into margins
+Pain Points: Can't see real-time profitability; loses deals to faster competitors
+Tech Savviness: Medium
+Key Features: Business dashboard, margin reports, inventory utilization
+
+Persona 2: Sales Manager - James
+
+Age: 32
+Company: European Football Tours (5 sales agents)
+Goals: Increase conversion rate; reduce quote creation time
+Pain Points: Quotes take 2+ hours; loses track of follow-ups
+Tech Savviness: High
+Key Features: Quick quote builder, pipeline tracking, email automation
+
+Persona 3: Operations Manager - Maria
+
+Age: 38
+Company: Global MotoGP Travel (30 staff, $15M revenue)
+Goals: Reduce manual work; eliminate errors in rooming lists
+Pain Points: Manual rooming lists prone to errors; can't track supplier confirmations
+Tech Savviness: Medium
+Key Features: Auto rooming lists, transfer manifests, tour operations dashboard
+
+Persona 4: Finance Manager - David
+
+Age: 50
+Company: Tennis Hospitality Worldwide (10 staff)
+Goals: Close books faster; track supplier payments accurately
+Pain Points: Manual payment reconciliation; can't easily calculate margins
+Tech Savviness: Low
+Key Features: Payment tracking, financial reports, supplier payment summary
+
+16.6 Competitive Analysis
+CompetitorStrengthsWeaknessesDifferentiationTourPlanEstablished (20 years); large customer baseLegacy UI; not sports-specific; slow innovationModern UX; sports event focus; flexible pricingTravelStudioStrong for group tours; good reportingNot event-focused; complex setup; expensiveEvent-first design; quick setup; competitive pricingRezdyGood for experiences; marketplace integrationLimited for multi-component packages; no B2BFull package builder; B2B + B2C; free-sell modelCustom/ExcelFlexible; familiarManual; error-prone; doesn't scaleAutomated; error-free; scales infinitely
+Our Competitive Advantage:
+
+Purpose-built for sports event tour operators
+Component-based package builder with ultimate flexibility
+Supports all inventory models (contracted, free-sell, buy-to-order)
+Both B2C and B2B workflows in one platform
+Operational tools (rooming lists, manifests, supplier coordination)
+Modern tech stack for speed and scalability
+
+16.7 Market Research Summary
+Total Addressable Market (TAM):
+
+Global sports event travel market: $23B (2024)
+Growing at 8.5% CAGR
+Primary markets: Europe (40%), North America (30%), Asia-Pacific (20%)
+
+Serviceable Addressable Market (SAM):
+
+Tour operators with >$1M revenue: ~5,000 globally
+Average software budget: $50K-$250K/year
+SAM: $250M-$1.25B
+
+Serviceable Obtainable Market (SOM):
+
+Year 1 target: 1% of SAM = $2.5M-$12.5M
+Year 3 target: 5% of SAM = $12.5M-$62.5M
+
+Customer Segments:
+
+F1 Tour Operators (35%): High margins, complex packages, corporate clients
+Football Hospitality (25%): Large groups, short trips, premium tickets
+Multi-Sport Operators (20%): Tennis, golf, motorsports, Olympics
+Niche Sports (10%): Cycling, rugby, cricket, etc.
+General Event Travel (10%): Concerts, conferences, festivals
+
+
+Document Approval
+RoleNameSignatureDateProduct ManagerEngineering LeadDesign LeadCEO/Founder
+
+Revision History
+VersionDateAuthorChanges1.0Nov 2025Product TeamInitial Release
+
+END OF DOCUMENT
