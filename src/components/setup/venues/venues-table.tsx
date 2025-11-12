@@ -18,6 +18,7 @@ import { useState, useEffect } from 'react'
 import { DeleteDialog } from '@/components/shared/delete-dialog'
 import { useRouter } from 'next/navigation'
 import { EmptyState } from '@/components/shared/empty-state'
+import { PageLoading } from '@/components/shared/page-loading'
 import * as api from '@/lib/api/venues'
 import { useOrganization } from '@/lib/hooks/use-organization'
 import { useQueryClient } from '@tanstack/react-query'
@@ -27,6 +28,14 @@ import { Input } from '@/components/ui/input'
 import { EntityCard } from '@/components/reusable/entity-card'
 import { SummaryTile } from '@/components/reusable/summary-tile'
 import { slugify } from '@/lib/utils/slug'
+import { useCountries } from '@/lib/hooks/use-countries'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
 
 // Inline editable cells
 function EditableNameCell({ row, onUpdate }: { row: any; onUpdate: (id: string, value: string) => Promise<void> }) {
@@ -202,6 +211,213 @@ function EditableCityCell({ row, onUpdate }: { row: any; onUpdate: (id: string, 
   )
 }
 
+function EditableVenueTypeCell({ row, onUpdate }: { row: any; onUpdate: (id: string, value: string) => Promise<void> }) {
+  const [isEditing, setIsEditing] = useState(false)
+  const currentValue = row.getValue('venue_type') as string
+  const [value, setValue] = useState(currentValue || '')
+  const [isSaving, setIsSaving] = useState(false)
+
+  useEffect(() => {
+    setValue(currentValue || '')
+  }, [currentValue])
+
+  const handleSave = async () => {
+    if (value === (currentValue || '')) {
+      setIsEditing(false)
+      return
+    }
+    setIsSaving(true)
+    try {
+      await onUpdate(row.original.id, value || undefined)
+      setIsEditing(false)
+    } catch (err) {
+      setValue(currentValue || '')
+    } finally {
+      setIsSaving(false)
+    }
+  }
+
+  const venueTypes = ['stadium', 'arena', 'track', 'circuit', 'course', 'other']
+
+  if (isEditing) {
+    return (
+      <Select
+        value={value || ''}
+        onValueChange={(newValue) => {
+          setValue(newValue)
+          handleSave()
+        }}
+        onOpenChange={(open) => {
+          if (!open && value !== currentValue) {
+            handleSave()
+          }
+        }}
+      >
+        <SelectTrigger className="h-8 w-32">
+          <SelectValue placeholder="Select type" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectItem value="">None</SelectItem>
+          {venueTypes.map((type) => (
+            <SelectItem key={type} value={type}>
+              {type.charAt(0).toUpperCase() + type.slice(1)}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
+    )
+  }
+
+  return (
+    <div onClick={() => setIsEditing(true)} className="cursor-pointer hover:bg-muted/50 rounded px-2 py-1 -mx-2 -my-1 min-h-[2rem] flex items-center">
+      {value ? <span className="text-sm capitalize">{value}</span> : '-'}
+    </div>
+  )
+}
+
+function EditableCapacityCell({ row, onUpdate }: { row: any; onUpdate: (id: string, value: number) => Promise<void> }) {
+  const [isEditing, setIsEditing] = useState(false)
+  const currentValue = row.getValue('capacity') as number
+  const [value, setValue] = useState(String(currentValue || ''))
+  const [isSaving, setIsSaving] = useState(false)
+
+  useEffect(() => {
+    setValue(String(currentValue || ''))
+  }, [currentValue])
+
+  const handleSave = async () => {
+    const numValue = value ? Number(value) : undefined
+    if (numValue === currentValue) {
+      setIsEditing(false)
+      return
+    }
+    if (value && (isNaN(Number(value)) || Number(value) < 0)) {
+      setValue(String(currentValue || ''))
+      setIsEditing(false)
+      return
+    }
+    setIsSaving(true)
+    try {
+      await onUpdate(row.original.id, numValue)
+      setIsEditing(false)
+    } catch (err) {
+      setValue(String(currentValue || ''))
+    } finally {
+      setIsSaving(false)
+    }
+  }
+
+  if (isEditing) {
+    return (
+      <Input
+        type="number"
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+        onBlur={handleSave}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter') handleSave()
+          if (e.key === 'Escape') {
+            setValue(String(currentValue || ''))
+            setIsEditing(false)
+          }
+        }}
+        autoFocus
+        disabled={isSaving}
+        className="h-8 w-24"
+        min="0"
+      />
+    )
+  }
+
+  return (
+    <div onClick={() => setIsEditing(true)} className="cursor-pointer hover:bg-muted/50 rounded px-2 py-1 -mx-2 -my-1 min-h-[2rem] flex items-center">
+      {currentValue ? <span className="text-sm">{currentValue.toLocaleString()}</span> : '-'}
+    </div>
+  )
+}
+
+function EditableCountryCell({ row, onUpdate }: { row: any; onUpdate: (id: string, value: string) => Promise<void> }) {
+  const [isEditing, setIsEditing] = useState(false)
+  const currentValue = row.getValue('country_code') as string
+  const [value, setValue] = useState(currentValue || '')
+  const [isSaving, setIsSaving] = useState(false)
+  const { data: countries = [], isLoading: countriesLoading } = useCountries()
+
+  useEffect(() => {
+    setValue(currentValue || '')
+  }, [currentValue])
+
+  const handleSave = async (newValue: string) => {
+    const finalValue = newValue === '__none__' ? '' : newValue
+    if (finalValue === (currentValue || '')) {
+      setIsEditing(false)
+      return
+    }
+    setIsSaving(true)
+    try {
+      await onUpdate(row.original.id, finalValue || '')
+      setIsEditing(false)
+    } catch (err) {
+      setValue(currentValue || '')
+      setIsEditing(false)
+    } finally {
+      setIsSaving(false)
+    }
+  }
+
+  if (isEditing) {
+    if (countriesLoading) {
+      return <div className="text-sm text-muted-foreground">Loading...</div>
+    }
+
+    return (
+      <Select
+        value={value || '__none__'}
+        onValueChange={(newValue) => {
+          setValue(newValue)
+          handleSave(newValue)
+        }}
+        onOpenChange={(open) => {
+          if (!open) {
+            if (value !== (currentValue || '__none__')) {
+              handleSave(value)
+            } else {
+              setIsEditing(false)
+            }
+          }
+        }}
+        disabled={isSaving}
+      >
+        <SelectTrigger className="h-8 w-40">
+          <SelectValue placeholder="Select country" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectItem value="__none__">None</SelectItem>
+          {countries.map((country) => (
+            <SelectItem key={country.code} value={country.code}>
+              {country.name} ({country.code})
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
+    )
+  }
+
+  const countryName = countries.find((c) => c.code === value)?.name
+
+  return (
+    <div onClick={() => setIsEditing(true)} className="cursor-pointer hover:bg-muted/50 rounded px-2 py-1 -mx-2 -my-1 min-h-[2rem] flex items-center">
+      {value ? (
+        <span className="text-sm">
+          {countryName ? `${countryName} (${value})` : value}
+        </span>
+      ) : (
+        '-'
+      )}
+    </div>
+  )
+}
+
 export function VenuesTable() {
   const { venues, isLoading, deleteVenue, duplicateVenue, updateVenue } = useVenues()
   const { currentOrg } = useOrganization()
@@ -295,18 +511,17 @@ export function VenuesTable() {
     {
       accessorKey: 'venue_type',
       header: 'Type',
-      cell: ({ row }) => {
-        const type = row.getValue('venue_type') as string
-        return type ? <span className="text-sm capitalize">{type}</span> : '-'
-      },
+      cell: ({ row }) => <EditableVenueTypeCell row={row} onUpdate={handleFieldUpdate('venue_type')} />,
     },
     {
       accessorKey: 'capacity',
       header: 'Capacity',
-      cell: ({ row }) => {
-        const capacity = row.getValue('capacity') as number
-        return capacity ? <span className="text-sm">{capacity.toLocaleString()}</span> : '-'
-      },
+      cell: ({ row }) => <EditableCapacityCell row={row} onUpdate={handleFieldUpdate('capacity')} />,
+    },
+    {
+      accessorKey: 'country_code',
+      header: 'Country',
+      cell: ({ row }) => <EditableCountryCell row={row} onUpdate={handleFieldUpdate('country_code')} />,
     },
     {
       id: 'actions',
@@ -343,7 +558,7 @@ export function VenuesTable() {
   ]
 
   if (isLoading) {
-    return <div>Loading...</div>
+    return <PageLoading />
   }
 
   if (!venues?.length) {

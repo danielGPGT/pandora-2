@@ -3,9 +3,12 @@
 import { useVenue, useVenues } from '@/lib/hooks/use-venues'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { AuditLog } from '@/components/shared/audit-log'
+import { PageLoading } from '@/components/shared/page-loading'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { InlineEditField } from '@/components/shared/inline-edit-field'
 import { InlineEditTextarea } from '@/components/shared/inline-edit-textarea'
+import { InlineEditSelect } from '@/components/shared/inline-edit-select'
+import { useCountries } from '@/lib/hooks/use-countries'
 import { DetailsContent, DetailValue, DetailImage, DetailBadge, DetailCode, DetailDate } from '@/components/reusable/details-content'
 import { Info, MapPin, Building2, Globe, Users, Clock, Image as ImageIcon } from 'lucide-react'
 import Image from 'next/image'
@@ -13,6 +16,7 @@ import Image from 'next/image'
 export function VenueDetails({ id }: { id: string }) {
   const { venue, isLoading } = useVenue(id)
   const { updateVenue } = useVenues()
+  const { data: countries = [] } = useCountries()
 
   const handleFieldUpdate = async (field: string, value: any) => {
     if (!venue) return
@@ -25,11 +29,17 @@ export function VenueDetails({ id }: { id: string }) {
   }
 
   if (isLoading) {
-    return <div>Loading...</div>
+    return <PageLoading />
   }
 
   if (!venue) {
-    return <div>Venue not found</div>
+    return (
+      <Card>
+        <CardContent className="flex flex-col items-center justify-center py-12">
+          <p className="text-muted-foreground">Venue not found</p>
+        </CardContent>
+      </Card>
+    )
   }
 
   return (
@@ -69,12 +79,21 @@ export function VenueDetails({ id }: { id: string }) {
                 },
                 {
                   label: "Venue Type",
-                  value: venue.venue_type ? (
-                    <DetailBadge>
-                      <span className="text-sm capitalize">{venue.venue_type}</span>
-                    </DetailBadge>
-                  ) : (
-                    <DetailValue value={null} emptyText="Not set" />
+                  value: (
+                    <InlineEditSelect
+                      value={venue.venue_type || ''}
+                      onSave={(value) => handleFieldUpdate('venue_type', value || undefined)}
+                      options={[
+                        { value: 'stadium', label: 'Stadium' },
+                        { value: 'arena', label: 'Arena' },
+                        { value: 'track', label: 'Track' },
+                        { value: 'circuit', label: 'Circuit' },
+                        { value: 'course', label: 'Course' },
+                        { value: 'other', label: 'Other' },
+                      ]}
+                      placeholder="Select venue type"
+                      emptyLabel="Not set"
+                    />
                   ),
                 },
                 {
@@ -110,28 +129,41 @@ export function VenueDetails({ id }: { id: string }) {
                 },
                 {
                   label: "Country",
-                  value: venue.country_code ? (
-                    <DetailBadge>
-                      <span className="text-sm">{venue.country_code}</span>
-                    </DetailBadge>
-                  ) : (
-                    <DetailValue value={null} emptyText="Not set" />
+                  value: (
+                    <InlineEditSelect
+                      value={venue.country_code || ''}
+                      onSave={(value) => handleFieldUpdate('country_code', value || undefined)}
+                      options={countries.map((country) => ({
+                        value: country.code,
+                        label: `${country.name} (${country.code})`,
+                      }))}
+                      placeholder="Select country"
+                      emptyLabel="Not set"
+                    />
                   ),
                 },
                 {
                   label: "Latitude",
-                  value: venue.latitude ? (
-                    <DetailCode value={venue.latitude.toString()} />
-                  ) : (
-                    <DetailValue value={null} emptyText="Not set" />
+                  value: (
+                    <InlineEditField
+                      value={venue.latitude ?? ''}
+                      onSave={(value) => handleFieldUpdate('latitude', value ? Number(value) : undefined)}
+                      type="number"
+                      placeholder="e.g., 51.5560"
+                      displayClassName="text-xs font-mono"
+                    />
                   ),
                 },
                 {
                   label: "Longitude",
-                  value: venue.longitude ? (
-                    <DetailCode value={venue.longitude.toString()} />
-                  ) : (
-                    <DetailValue value={null} emptyText="Not set" />
+                  value: (
+                    <InlineEditField
+                      value={venue.longitude ?? ''}
+                      onSave={(value) => handleFieldUpdate('longitude', value ? Number(value) : undefined)}
+                      type="number"
+                      placeholder="e.g., -0.2795"
+                      displayClassName="text-xs font-mono"
+                    />
                   ),
                 },
                 {
@@ -155,10 +187,14 @@ export function VenueDetails({ id }: { id: string }) {
               fields: [
                 {
                   label: "Capacity",
-                  value: venue.capacity ? (
-                    <DetailValue value={<span className="text-sm font-medium">{venue.capacity.toLocaleString()}</span>} />
-                  ) : (
-                    <DetailValue value={null} emptyText="Not set" />
+                  value: (
+                    <InlineEditField
+                      value={venue.capacity ?? ''}
+                      onSave={(value) => handleFieldUpdate('capacity', value ? Number(value) : undefined)}
+                      type="number"
+                      placeholder="e.g., 90000"
+                      displayClassName="text-sm font-medium"
+                    />
                   ),
                 },
               ],
